@@ -112,7 +112,6 @@ const formatedMatches = (
 
 const formateScorecardData = (scorecard) => {
     const data = scorecard?._doc || scorecard;
-
     if (!data) return null;
 
     const sportSpecificDetailsObj = Object.fromEntries(data.sportSpecificDetails);
@@ -121,7 +120,11 @@ const formateScorecardData = (scorecard) => {
 
     const inningData = innings === 1 ? sportSpecificDetailsObj.firstInnings : sportSpecificDetailsObj.secondInnings;
 
-    const scoreStats = Object.fromEntries(inningData?.statistics instanceof Map ? inningData.statistics : []);
+    const stats = inningData?.statistics;
+    const scoreStats = stats instanceof Map
+        ? Object.fromEntries(stats)
+        : (typeof stats === 'object' && stats !== null ? stats : {});
+
 
     const cricketTeam1 = {
         id: data?.teams?.teamA?.teamId || "1234",
@@ -189,13 +192,13 @@ const formateScorecardData = (scorecard) => {
             striker: sportSpecificDetailsObj?.striker?.userName || null,
             nonStriker: sportSpecificDetailsObj?.nonStriker?.userName || null
         },
-        currentBowler: sportSpecificDetailsObj?.currentBowler?.userName || null,
+        currentBowler: pcreateBowlingCards(cricketTeam1 || null, sportSpecificDetailsObj),
         recentOvers: createRecentOvers(),
         partnership: {
             runs: 45,
             balls: 32
         },
-        currentRunRate: 8.5,
+        currentRunRate: scoreStats?.runRate,
         target: undefined,
         lastWicket: "P1 c P5 b P8 30(25)"
     };
@@ -211,10 +214,12 @@ const createPlayers = (teamPlayers) => {
         position: "batsman",
         jerseyNumber: index,
         isCaptain: "isCaptain",
+        statistics: value?.statistics
     }))
 };
 
 const createBowlingCards = (team) => {
+    // console.log("team", team)
     return team.players.slice(5, 11).map((player, index) => {
         if (index < 4) {
             const overs = 2 + Math.floor(Math.random() * 2);
@@ -247,6 +252,28 @@ const createBowlingCards = (team) => {
         }
     });
 };
+const pcreateBowlingCards = (team, sportSpecificDetailsObj) => {
+    const player = team.players?.find((player) => player?.id === sportSpecificDetailsObj?.currentBowler?.playerId);
+
+    if (player) {
+        const stats = Object.fromEntries(player?.statistics)
+        console.log(stats)
+        return {
+            player,
+            overs: ballsToOvers(stats?.ballsConceded || 0),
+            maidens: 0,
+            runs: stats?.runs || 0,
+            wickets: stats?.wickets || 0,
+            economy: calculateEconomy(stats?.runs || 0, stats?.ballsConceded || 0) || '0.0',
+            dots: stats?.dots || 0,
+            wides: stats?.wides || 0,
+            noBalls: stats?.noBalls || 0
+        };
+    }
+
+    return null;
+};
+
 
 const createRecentOvers = () => {
     const overs = [];
@@ -332,4 +359,21 @@ const createBattingCards = (team) => {
     });
 };
 
+const ballsToOvers = (balls) => {
+    const overs = Math.floor(balls / 6);
+    const remainingBalls = balls % 6;
+    return `${overs || 0}.${remainingBalls || 0}`;
+};
+
+const calculateEconomy = (runsConceded, ballsBowled) => {
+    const decimalOvers = ballsBowled / 6;
+    if (decimalOvers === 0) return 0;
+    return (runsConceded / decimalOvers).toFixed(2); // rounded to 2 decimal places
+};
+
 module.exports = { formatedMatches, formateScorecardData };
+
+
+
+
+
