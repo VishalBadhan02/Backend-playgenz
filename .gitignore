@@ -7,8 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 
 # dotenv
-# .env
-# .env.*.local
+.env
+.env.*.local
 
 # VS Code
 .vscode/
