@@ -1,0 +1,216 @@
+{
+    "sidebar_links": [
+        {
+            "name": "Home",
+            "link": "/"
+        },
+        {
+            "name": "Shopping",
+            "link": "/shopping"
+        },
+        {
+            "name": "Cart",
+            "link": ""
+        },
+        {
+            "name": "Achivements",
+            "link": ""
+        },
+        {
+            "name": "Tournament",
+            "link": "",
+            "data_bs_toggle": "dropdown",
+            "dropdown_toggle": "dropdown-toggle",
+            "sub_type": [
+                {
+                    "name": "Register Tournament",
+                    "link": "/tournament_control"
+                },
+                {
+                    "name": "Search Tournament",
+                    "link": "/manage_Tournamen"
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "link": "/scorecard"
+        }
+    ],
+    "games_link": [
+        {
+            "name": "Cricket",
+            "link": "",
+            "icon": "Swords",
+            "value": "cricket",
+            "color": "from-green-500 to-green-600",
+            "player": "11",
+            "substitute": "4",
+            "label": "Over",
+            "default": 10
+        },
+        {
+            "name": "Football",
+            "link": "",
+            "icon": "Dribbble",
+            "value": "football",
+            "color": "from-blue-500 to-blue-600",
+            "player": "11",
+            "substitute": "4",
+            "label": "Time",
+            "default": 60
+        },
+        {
+            "name": "Volleyball",
+            "link": "",
+            "icon": "VolleyBall",
+            "value": "volleyball",
+            "color": "from-yellow-500 to-yellow-600",
+            "player": "6",
+            "substitute": "6",
+            "label": "Set",
+            "default": 3
+        },
+        {
+            "name": " Badminton",
+            "link": "",
+            "icon": "Tennis",
+            "value": "badminton",
+            "color": "rom-indigo-500 to-indigo-600",
+            "player": "2",
+            "substitute": "1",
+            "label": "Set",
+            "default": 3
+        },
+        {
+            "name": "Tennis ",
+            "link": "",
+            "icon": "Target",
+            "value": "tennis",
+            "color": "from-purple-500 to-purple-600",
+            "player": "2",
+            "substitute": "1",
+            "label": "Set",
+            "default": 3
+        },
+        {
+            "name": "Basketball",
+            "link": "",
+            "icon": "Basketball",
+            "value": "basketball",
+            "color": "from-orange-500 to-orange-600",
+            "player": "5",
+            "substitute": "5",
+            "label": "Set",
+            "default": 3
+        },
+        {
+            "name": "Hocky",
+            "link": "",
+            "icon": "Hocky",
+            "value": "hocky",
+            "color": "from-orange-500 to-orange-600",
+            "player": "11",
+            "substitute": "4",
+            "label": "Time",
+            "default": 30
+        }
+    ],
+    "onlineGameLink": [
+        {
+            "name": "PUBG",
+            "link": "",
+            "icon": "pubg",
+            "value": "pubg",
+            "color": "from-orange-500 to-orange-600",
+            "player": "4",
+            "substitute": "",
+            "label": "set",
+            "default": 30
+        }
+    ],
+    "offline": [
+        {
+            "type": "Single Elimination",
+            "value": "single_elimination"
+        },
+        {
+            "type": "Double Elimination",
+            "value": "double_elimination"
+        },
+        {
+            "type": "Round Robin",
+            "value": "round_robin"
+        },
+        {
+            "type": "Swiss System",
+            "value": "swiss_system"
+        },
+        {
+            "type": "Group Stage",
+            "value": "group_stage"
+        }
+    ],
+    "online": [
+        {
+            "type": "Solo Tournament (1v99)",
+            "value": "solo_tournament",
+            "description": "Each player plays individually. Last person standing wins. Scoring: Placement + Kills."
+        },
+        {
+            "type": "Duo Tournament (2v49)",
+            "value": "duo_tournament",
+            "description": "Teams of two compete. Last surviving duo wins. Scoring: Placement + Kills."
+        },
+        {
+            "type": "Squad Tournament (4v25)",
+            "value": "squad_tournament",
+            "description": "Teams of four compete. Last surviving squad wins. Scoring: Placement + Kills."
+        },
+        {
+            "type": "Kill Race Tournament",
+            "value": "kill_race",
+            "description": "Players/teams play multiple matches. Highest number of kills wins. Can be single-lobby or multi-lobby."
+        },
+        {
+            "type": "Zone Survival Tournament",
+            "value": "zone_survival",
+            "description": "Players earn points for surviving in the safe zone. The longer you survive, the more points you get."
+        },
+        {
+            "type": "Custom Room Tournament",
+            "value": "custom_room",
+            "description": "Unique match formats like Melee Weapons Only, Sniper Battle, Pistols Only, No Healing Items."
+        },
+        {
+            "type": "League-Style Tournament",
+            "value": "league_style",
+            "description": "Long-term tournament with multiple matches. Format: Regular Season → Playoffs → Grand Finals."
+        },
+        {
+            "type": "Single Elimination Bracket",
+            "value": "single_elimination",
+            "description": "Lose once → Eliminated. Format: (16 Teams → 8 → 4 → 2 → Winner)."
+        },
+        {
+            "type": "Double Elimination Bracket",
+            "value": "double_elimination",
+            "description": "Lose once → Move to Losers' Bracket. Lose twice → Eliminated."
+        },
+        {
+            "type": "Battle Royale Marathon",
+            "value": "battle_royale_marathon",
+            "description": "Best of 10 Matches → Consistent teams win. Requires long-term performance."
+        },
+        {
+            "type": "Influencer/Streamer Tournament",
+            "value": "influencer_tournament",
+            "description": "Invite famous streamers or influencers. Great for promotion and audience engagement."
+        },
+        {
+            "type": "Fantasy PUBG Tournament",
+            "value": "fantasy_pubg",
+            "description": "Viewers create fantasy teams with real players. Players earn points based on real match performance."
+        }
+    ]
+}

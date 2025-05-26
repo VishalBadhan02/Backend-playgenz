@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package tournament;
+
+service TournamentService {
+  // Fetch a single tournament by ID
+  rpc GetTournament(GetTournamentRequest) returns (GetTournamentResponse);
+
+  // Fetch multiple tournaments with pagination
+  rpc ListTournaments(ListTournamentsRequest) returns (ListTournamentsResponse);
+
+  // updating the fixtures for scoring 
+   rpc GetMatchById (MatchRequest) returns (MatchResponse);
+}
+
+// A single tournament
+message Tournament {
+  string id = 1;
+  string name = 2;
+  string poster = 3;
+  string sport = 4;
+  string tournament_mode = 5; // "online" or "offline"
+  string fixture_type = 6;
+  string start_date = 7;
+  string end_date = 8;
+  int32 total_teams = 9;
+
+  Location location = 10;
+  double entry_fee = 11;
+
+  Prizes prizes = 12;
+
+  string status = 13;
+  bool is_verified = 14;
+  string winner = 15;
+
+  string created_at = 16;
+  string updated_at = 17;
+}
+
+// For location fields
+message Location {
+  string country = 1;
+  string state = 2;
+  string city = 3;
+}
+
+// For prize details
+message Prizes {
+  double first_price = 1;
+  double second_price = 2;
+  double third_price = 3;
+}
+
+// For returning a single tournament
+message GetTournamentRequest {
+  string id = 1;
+}
+
+message GetTournamentResponse {
+  Tournament tournament = 1;
+}
+
+// For returning a list of tournaments
+message ListTournamentsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListTournamentsResponse {
+  repeated Tournament tournaments = 1;
+}
+
+
+message MatchRequest {
+  string matchId = 1;
+  string tournamentId = 2;
+  string status = 3;
+}
+
+message MatchResponse {
+   bool status = 1;
+}

@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package user;
+
+// The user service definition.
+service UserService {
+  // Retrieves a user by ID.
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+
+  // Creates a new user.
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+
+  // Check unique userName.
+  rpc GetUserName (userName) returns (UniqueUserNameResponse);
+
+  // Get usre id's for notification
+  rpc GetUserIds (UserIds) returns (BulkUsers);
+
+  // handel friends modal for updates
+  rpc GetModalId (GetNotificationRequest) returns (UniqueUserNameResponse);
+}
+
+// The request message containing the user ID.
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message GetNotificationRequest {
+  string _id = 1;
+  string action = 2;
+}
+
+// The response message containing the user details.
+message GetUserResponse {
+  User user = 1;
+}
+
+// The request message containing the user details for creation.
+message CreateUserRequest {
+  string id = 3;
+  string firstName = 1;
+  string lastName = 2;
+  string userName = 4;
+  string phoneNumber = 5;
+  string email = 6;
+  string address = 7;
+  string status = 8;
+  string userType = 9;
+}
+
+// The response message containing the created user's details.
+message CreateUserResponse {
+  User user = 1;
+}
+
+// The User message definition.
+message User {
+  string _id = 3;
+  string firstName = 1;
+  string lastName = 2;
+  string userName = 4;
+  string phoneNumber = 5;
+  string email = 6;
+  string address = 7;
+  string status = 8;
+  string userType = 9;
+  string profilePicture = 10;
+}
+
+// The Address message definition.
+message Address {
+  string street = 1;
+  string city = 2;
+  string state = 3;
+  string postal_code = 4;
+  string country = 5;
+}
+
+// The unique userName message definition
+message userName {
+  string userName = 1;
+}
+
+//Reaponse in boolean for unique userName
+message UniqueUserNameResponse {
+  bool isUnique = 1;
+}
+
+// The id's to get user data
+
+message UserIds {
+ repeated string users = 1;
+}
+
+message BulkUsers {
+  repeated User bulk =1;
+}

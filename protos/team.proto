@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+package team;
+
+// Define the TeamService
+service TeamService {
+  rpc GetTeamByUser (GetTeamRequest) returns (GetTeamResponse);
+
+   // Get team id's 
+  rpc GetTeamIds (teamIds) returns (BulkTeams);
+
+  // tounament match Scheduling
+  rpc BulkCreateSchedules (BulkCreateScheduleRequest) returns (BulkCreateScheduleResponse);
+
+  // get single scheduled match for scoring
+  rpc GetMatch (GetMatchRequest) returns (GetMatchResponse);
+
+  // for bulk responses 
+  rpc ListMatches (ListMatchesRequest) returns (ListMatchesResponse);
+}
+
+// Request message to fetch a user's team
+message GetTeamRequest {
+  string user_id = 1;
+}
+
+// Response message containing the team details
+message GetTeamResponse {
+  repeated teamRes teams = 1;
+  repeated otherTeam otherTeamsWithDetails = 2;
+}
+
+message teamRes {
+  string id = 1;
+  string name = 2;
+  string user_id = 3;
+  string email = 4;
+  string phoneNumber = 5;
+  int32 noOfPlayers = 6;
+  int32 substitute = 7;
+  string homeGround = 8;
+  string addressOfGround = 9;
+  string pinCode = 10;
+  string imageUrl = 11;
+  string role = 12;
+  string sport = 13;
+  string description = 14;
+  int32 members = 15;
+  repeated string joinTeam = 16;
+  string createdAt =17;
+}
+
+message otherTeam {
+  int32 status = 1;
+  int32 members = 2;
+}
+
+message teamIds {
+ repeated string teams = 1;
+}
+
+message BulkTeams {
+  repeated teamRes bulk =1;
+}
+
+
+
+
+
+
+
+
+
+
+
+// Scheduling matches of tounrmaent 
+
+// One Scheduled Match
+message ScheduledMatch {
+    string matchType = 1;
+    string tournamentId = 2;
+    int32 tournamentRound = 3;
+    string homeTeam = 4;
+    string scheduledByUserId = 5;
+    string awayTeam = 6;
+    string opponentUserId = 7;
+    string matchDate = 8;
+    int32 numberOfMatches = 9;
+    string matchLocation = 10;
+    string groundName = 11;
+    string numberOfOvers = 12;
+    int32 numberOfPlayers = 13;
+    int32 internalStatus = 14;
+    string matchStatus = 15;
+    int32 rematchCount = 16;
+    string sessionId = 17;
+    string sportType = 18;
+    string matchResultJson = 19; // we send matchResult as JSON string
+    string matchId= 20;
+    repeated TeamMember teamA = 21;
+    repeated TeamMember teamB = 22;
+    string teamAName= 23;
+    string teamBName= 24;
+}
+
+// Team members of the team
+message TeamMember {
+  string teamName = 1;
+  string createdAt = 2;
+  string profilePicture = 3;
+  string playerId = 4;
+  string commit = 5;
+  string id = 6;
+  string playerName = 7;
+}
+
+// Request to bulk create matches
+message BulkCreateScheduleRequest {
+    repeated ScheduledMatch matches = 1; // array of matches
+}
+
+// Response after bulk create
+message BulkCreateScheduleResponse {
+    repeated string matchIds = 1; // array of created match IDs
+} 
+
+// request for single match
+message GetMatchRequest {
+  string id = 1;
+}
+
+// response for single match
+message GetMatchResponse {
+  ScheduledMatch match = 1;
+}
+
+message ListMatchesRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListMatchesResponse {
+  repeated ScheduledMatch matches = 1;
+}
+
+

@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @unique
+  email     String   @unique
+  phoneNumber String?  @unique
+  name      String?
+  password  String
+  status    String
+  userType  String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OTP {
+  id         String    @id @default(uuid())
+  email      String?   @unique
+  phone      String?   @unique
+  code       String
+  attempts   Int       @default(0)
+  isUsed     Boolean   @default(false)
+  expiresAt  DateTime
+  createdAt  DateTime  @default(now())
+  userId     String?   @unique
+  tempUser   TempUser? @relation(fields: [userId], references: [id])
+}
+
+model TempUser {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  firstName   String
+  lastName    String
+  userName    String?
+  password    String
+  address     String
+  status      String
+  userType    String   @default("user")
+  phoneNumber String?  @unique
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  otp         OTP?
+}
+
